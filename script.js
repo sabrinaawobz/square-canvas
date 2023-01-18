@@ -1,29 +1,44 @@
+function drawLine() {
 
+    var ctx = document.getElementById('canvas').getContext('2d');
 
-var canvas = document.getElementById('canvas');
+    for (var i = 0; i < 50; i++) {    
+      ctx.fillStyle = 'red' 
+      ctx.fillRect(i * 50, 0, 25, 25);
+      ctx.fillStyle = 'black';   
+      ctx.fillRect(i * 50 + 25, 0, 25, 25);
+    }
 
-var ctx = canvas.getContext('2d'); 
-var ctx2 = canvas.getContext('2d'); 
-
-ctx.fillStyle = 'red';
-ctx.fillRect(0, 0, 300, 100); 
-
-ctx2.fillStyle = 'green';
-ctx2.fillRect(280, 0, 500, 100); 
-
-function drawLine(nbrCarre) {
-   
-      
+    for (var i = 0; i < 50; i++) { 
+      ctx.fillStyle = 'black' 
+      ctx.fillRect(i * 50, 25, 25, 25);
+      ctx.fillStyle = 'red';   
+      ctx.fillRect(i * 50 + 25, 25, 25, 25); 
+    }
 }
 
-/*
+drawLine();
+  
+function drawLineDeux() {
+  
+    var ctx = document.getElementById('canvas').getContext('2d');
 
-function drawLine(nbrCarre) {
+    for (var i = 0; i < 50; i++) {    
+      ctx.fillStyle = 'red';
+      ctx.fillRect(i * 50 + 0, 50, 25, 25);
+      ctx.fillStyle = 'black';   
+      ctx.fillRect(i * 50 + 25, 50, 25, 25);
+    }
 
-    
-}*/
+    for (var i = 0; i < 50; i++) { 
+       ctx.fillStyle = 'black';
+      ctx.fillRect(i * 50, 75, 25, 25);
+      ctx.fillStyle = 'red';   
+      ctx.fillRect(i * 50 + 25, 75, 25, 25);
+    }
+}
 
-
+drawLineDeux();
 
 
 
