@@ -1,46 +1,29 @@
-function drawLine() {
+let black = '#202020';
+let orange = '#FFA500';
 
-    var ctx = document.getElementById('canvas').getContext('2d');
-
-    for (var i = 0; i < 50; i++) {    
-      ctx.fillStyle = 'red' 
-      ctx.fillRect(i * 50, 0, 25, 25);
-      ctx.fillStyle = 'black';   
-      ctx.fillRect(i * 50 + 25, 0, 25, 25);
-    }
-
-    for (var i = 0; i < 50; i++) { 
-      ctx.fillStyle = 'black' 
-      ctx.fillRect(i * 50, 25, 25, 25);
-      ctx.fillStyle = 'red';   
-      ctx.fillRect(i * 50 + 25, 25, 25, 25); 
-    }
+function drawSquare(x, y, size, color) {
+  var ctx = document.getElementById('canvas').getContext('2d');
+  ctx.fillStyle = (color);
+  ctx.fillRect(x, y, size, size); 
 }
 
-drawLine();
-  
-function drawLineDeux() {
-  
-    var ctx = document.getElementById('canvas').getContext('2d');
+let colors = [orange, black];
+let colors2 = [black, orange];
 
-    for (var i = 0; i < 50; i++) {    
-      ctx.fillStyle = 'red';
-      ctx.fillRect(i * 50 + 0, 50, 25, 25);
-      ctx.fillStyle = 'black';   
-      ctx.fillRect(i * 50 + 25, 50, 25, 25);
-    }
-
-    for (var i = 0; i < 50; i++) { 
-       ctx.fillStyle = 'black';
-      ctx.fillRect(i * 50, 75, 25, 25);
-      ctx.fillStyle = 'red';   
-      ctx.fillRect(i * 50 + 25, 75, 25, 25);
-    }
+function drawLine(x, y, length, sizeSquare) {
+  let i = 0;
+  while (i < length) {
+    drawSquare(x + i * sizeSquare, y, sizeSquare, colors[i%2]);
+    i++;
+  }
 }
 
-drawLineDeux();
+function drawCheck(x, y, width, height, sizeSquare) {
+  for (let j = 0; j < height; j++) {
+      for (let i = 0; i < width; i++) {
+  drawSquare(x + i * sizeSquare, y + j * sizeSquare, sizeSquare, colors2[(i+j) % 2]);
+      }
+  }
+}
 
-
-
-
-
+drawCheck(0, 0, 6, 4, 100);
