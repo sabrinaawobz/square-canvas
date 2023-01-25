@@ -1,27 +1,50 @@
-let black = '#202020';
-let orange = '#FFA500';
+let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+
+
 
 function drawSquare(x, y, size, color) {
-  var ctx = document.getElementById('canvas').getContext('2d');
-  ctx.fillStyle = (color);
-  ctx.fillRect(x, y, size, size); 
+  if (x < 0) {
+    x += canvas.width;
+  }
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, size, size);
 }
 
-let colors = [orange, black];
-let colors2 = [black, orange];
-
-function drawLine(x, y, length, sizeSquare,colors) {
-    for (let i = 0; i < length; i++) {
-        let color = colors[i%2];
-        drawSquare(x + i * sizeSquare, y, sizeSquare, color);
-    }
-}
-
-function drawCheck(x, y, width, height, sizeSquare) {
-  for (let i = 0; i < height; i++) {
-      let colorsToUse = i % 2 == 0 ? [orange, black] : [black, orange];
-      drawLine(x, y + i * sizeSquare, width, sizeSquare, colorsToUse);
+function drawLine(x, y, length, colors, squareSize) {
+  for (let i = 0; i < length; i++) {
+    drawSquare(x + i * squareSize, y, squareSize, colors[i % colors.length]);
   }
 }
 
-drawCheck(0, 0, 15, 8, 100);
+function drawCheck(x, y, gridSize, colors, squareSize) {
+  for (let i = 0; i < gridSize; i++) {
+    let currColors = [...colors.slice(i%colors.length, colors.length), ...colors.slice(0, i%colors.length)]; 
+    drawLine(x, y + squareSize * i, gridSize, currColors, squareSize);
+  }
+}
+
+let x = -10;
+let duration = 2000;
+let speed = 20;
+
+function animate() {
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawCheck(x, 11, 15, ['green', 'red', 'yellow', 'white', 'black'], 15);
+  drawCheck(x - canvas.width, 11, 15, ['green', 'red', 'yellow', 'white', 'black'], 15);
+  x += speed;
+  x = x % canvas.width;
+
+  setTimeout(animate, duration / speed );
+
+}
+
+animate();
+
+document.addEventListener('click',function(e) {
+  function stopAnimation() {
+    isAnimating = false;
+  }
+});
