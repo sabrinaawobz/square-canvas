@@ -566,28 +566,18 @@ let pos = new (0, _position.Position)(100, 200);
 let square = new (0, _square.Square)(pos, 50, "red");
 square.draw(myCanvas.context);
 
-},{"./DrawLine":"1iQbz","./Canvas":"fFIka","./Square":"ddTsK","./Position":"7075p"}],"1iQbz":[function(require,module,exports) {
+},{"./Canvas":"fFIka","./Square":"ddTsK","./Position":"7075p","./DrawLine":"1iQbz"}],"fFIka":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "DrawLine", ()=>DrawLine);
-var _square = require("./Square");
-class DrawLine {
-    constructor(x, y, length, colors, size){
-        this.x = x;
-        this.y = y;
-        this.length = length;
-        this.colors = colors;
-        this.size = size;
-    }
-    drawLine(context) {
-        for(let i = 0; i < this.length; i++){
-            let square = new (0, _square.Square)(this.x + i * this.size, this.y, this.size, this.colors[i % this.colors.length]);
-            square.draw(context);
-        }
+parcelHelpers.export(exports, "Canvas", ()=>Canvas);
+class Canvas {
+    constructor(id){
+        this.element = document.getElementById(id);
+        this.context = this.element.getContext("2d");
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Square":"ddTsK"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -633,17 +623,6 @@ class Square {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fFIka":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Canvas", ()=>Canvas);
-class Canvas {
-    constructor(id){
-        this.element = document.getElementById(id);
-        this.context = this.element.getContext("2d");
-    }
-}
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -655,6 +634,27 @@ class Position {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dpgAG","6rimH"], "6rimH", "parcelRequiree364")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1iQbz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DrawLine", ()=>DrawLine);
+var _square = require("./Square");
+class DrawLine {
+    constructor(x, y, length, colors, size){
+        this.x = x;
+        this.y = y;
+        this.length = length;
+        this.colors = colors;
+        this.size = size;
+    }
+    drawLine(context) {
+        for(let i = 0; i < this.length; i++){
+            let square = new (0, _square.Square)(this.x + i * this.size, this.y, this.size, this.colors[i % this.colors.length]);
+            square.draw(context);
+        }
+    }
+}
+
+},{"./Square":"ddTsK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dpgAG","6rimH"], "6rimH", "parcelRequiree364")
 
 //# sourceMappingURL=index.8cfc62b9.js.map
