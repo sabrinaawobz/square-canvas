@@ -588,7 +588,7 @@ let animation = new (0, _animation.Animation)(canvasId);
 animation.animate();
 console.log(canvas.width);
 
-},{"./Canvas":"fFIka","./Line":"cqVHX","./Square":"ddTsK","./Position":"7075p","./Check":"hUeBT","./Animation":"1EkQ1"}],"fFIka":[function(require,module,exports) {
+},{"./Canvas":"fFIka","./Square":"ddTsK","./Position":"7075p","./Line":"cqVHX","./Check":"hUeBT","./Animation":"1EkQ1"}],"fFIka":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Canvas", ()=>Canvas);
@@ -629,7 +629,34 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"cqVHX":[function(require,module,exports) {
+},{}],"ddTsK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Square", ()=>Square);
+class Square {
+    constructor(pos, size, color){
+        this.pos = pos;
+        this.size = size;
+        this.color = color;
+    }
+    draw(context) {
+        context.fillStyle = this.color;
+        context.fillRect(this.pos.x, this.pos.y, this.size, this.size);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Position", ()=>Position);
+class Position {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqVHX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Line", ()=>Line);
@@ -651,116 +678,7 @@ class Line {
     }
 }
 
-},{"./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ddTsK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Square", ()=>Square);
-class Square {
-    constructor(pos, size, color){
-        this.pos = pos;
-        this.size = size;
-        this.color = color;
-    }
-    draw(context) {
-        context.fillStyle = this.color;
-        context.fillRect(this.pos.x, this.pos.y, this.size, this.size);
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Position", ()=>Position) /*export class Position {
-    constructor(x, y) {
-    this._x = x;
-    this._y = y;
-}
-    setX(value) {
-        if (value == "a") value = 10;
-        this._x = value;
-    }
-
-    getX() {
-        return this._x;
-    }
-    //-------
-
-    setY(value) {
-        if (value == "b") value = 0;
-        this._y = value;
-    }
-
-    getY() {
-        return this._y;
-    }
-}
-
-new Position().setX(10)
-new Position().setY(10)
-*/  //--------------------------------------------------
- /*
-export class Position {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    
-    get positionXY() {
-        return this.x + this.y;
-    }
-    set positions(valeur) {
-        this.x
-    }
-}
-
-*/  /*setX(x) {
-        if (x == "a") // refuse les string "a"
-             return
-        this._x = x;
-    }
-
-    getX() {
-        return this._x;
-    }
-*/  //--------------------------------------------------
- /*export class Position {
-    constructor(x, y) {
-        this._x = x;
-        this._y = y;
-    }
-    
-    setX(x) {
-        if (x == "a") // refuse les string "a"
-             return
-        this._x = x;
-    }
-
-    getX() {
-        return this._x;
-    }
-}
-
-*/ ;
-class Position {
-    constructor(x, y){
-        this._x = x;
-        this._y = y;
-    }
-    set x(value) {
-        this._x = value;
-    }
-    get x() {
-        return this._x;
-    }
-    set y(value) {
-        this._y = value;
-    }
-    get y() {
-        return this._y;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hUeBT":[function(require,module,exports) {
+},{"./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hUeBT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Check", ()=>Check) /*
