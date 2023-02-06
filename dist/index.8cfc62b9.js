@@ -565,17 +565,6 @@ var _check = require("./Check");
 var _animation = require("./Animation");
 let myCanvas = new (0, _canvas.Canvas)("canvas");
 let pos = new (0, _position.Position)();
-/*pos.setX(10);
-pos.setY(10);
-//pos.setX(5);
-pos._x = "a";
-pos._y = "b";
-
-
-*/ //let square = new Square(pos, 50, 'red');
-//square.draw(myCanvas.context);
-//let line = new Line(pos, 10, ['red', 'blue', 'green'], 20);
-//line.draw(myCanvas.context);
 let check = new (0, _check.Check)(pos, 10, [
     "red",
     "blue",
@@ -586,9 +575,8 @@ check.draw(myCanvas.context);
 let canvasId = "canvas";
 let animation = new (0, _animation.Animation)(canvasId);
 animation.animate();
-console.log(canvas.width);
 
-},{"./Canvas":"fFIka","./Square":"ddTsK","./Position":"7075p","./Line":"cqVHX","./Check":"hUeBT","./Animation":"1EkQ1"}],"fFIka":[function(require,module,exports) {
+},{"./Canvas":"fFIka","./Line":"cqVHX","./Square":"ddTsK","./Position":"7075p","./Check":"hUeBT","./Animation":"1EkQ1"}],"fFIka":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Canvas", ()=>Canvas);
@@ -629,34 +617,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"ddTsK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Square", ()=>Square);
-class Square {
-    constructor(pos, size, color){
-        this.pos = pos;
-        this.size = size;
-        this.color = color;
-    }
-    draw(context) {
-        context.fillStyle = this.color;
-        context.fillRect(this.pos.x, this.pos.y, this.size, this.size);
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Position", ()=>Position);
-class Position {
-    constructor(x, y){
-        this.x = x;
-        this.y = y;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cqVHX":[function(require,module,exports) {
+},{}],"cqVHX":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Line", ()=>Line);
@@ -678,34 +639,53 @@ class Line {
     }
 }
 
-},{"./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hUeBT":[function(require,module,exports) {
+},{"./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ddTsK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Check", ()=>Check) /*
-export class Check {
-    constructor(pos, gridSize, colors, size) {
+parcelHelpers.export(exports, "Square", ()=>Square);
+class Square {
+    constructor(pos, size, color){
         this.pos = pos;
-        this.gridSize = gridSize;
-        this.colors = colors;
         this.size = size;
+        this.color = color;
     }
     draw(context) {
-        for (let i = 0; i < this.gridSize; i++) {
-            
-            let currColors = [...colors.slice(i%colors.length, colors.length), ...colors.slice(0, i%colors.length)]; 
-            let squarePos = new Position(this.pos.x, this.pos.y + i * this.size);
-            let line = new Line(squarePos, length, currColors, size);
-            line.draw(context);
-        }
+        context.fillStyle = this.color;
+        context.fillRect(this.pos.x, this.pos.y, this.size, this.size);
     }
 }
-*/  /*
-function Check(x, y, gridSize, colors, squareSize) {
-    for (let i = 0; i < gridSize; i++) {
-      let currColors = [...colors.slice(i%colors.length, colors.length), ...colors.slice(0, i%colors.length)]; 
-      Line(x, y + squareSize * i, gridSize, currColors, squareSize);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Position", ()=>Position);
+class Position {
+    constructor(x, y, canvas1){
+        this._x = x;
+        this._y = y;
+        this.canvas = canvas1;
     }
-}*/ ;
+    set x(value) {
+        console.log(canvas.width);
+        if (value === this.canvas.width) this._x = 0;
+        else this._x = value;
+    }
+    get x() {
+        return this._x;
+    }
+    set y(value) {
+        if (value === this.canvas.height) this._y = 0;
+        else this._y = value;
+    }
+    get y() {
+        return this._y;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hUeBT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Check", ()=>Check);
 var _line = require("./Line");
 var _square = require("./Square");
 var _position = require("./Position");
@@ -732,96 +712,7 @@ class Check {
 },{"./Line":"cqVHX","./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1EkQ1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Animation", ()=>Animation) /*export class Animation {
-    constructor(canvasId) {
-      this.canvas = document.getElementById(canvasId);
-      this.context = this.canvas.getContext("2d");
-      this.start = 1;
-      this.speed = 1;
-    }
-    
-    animate() {
-      setInterval(() => {
-        this.clearCanvas();
-        this.start += this.speed;
-        let pos = new Position(this.start, 5);
-        let check = new Check(pos, 10, ['red', 'blue', 'green', 'black'], 20);
-        check.draw(this.context);
-      }, 50);
-    }
-    
-    clearCanvas() {
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-  }
-*/  /*
-class Animation {
-  constructor(canvasId) {
-    this.x = 100;
-    this.duration = 1000;
-    this.speed = 20;
-    this.canvas = new Canvas(canvasId);
-  }
-
-  animate() {
-    let context = this.canvas.context;
-    context.clearRect(0, 0, this.canvas.element.width, this.canvas.element.height);
-
-    let check = new Check(new Position(this.x - this.canvas.element.width, 11), 11, ['green','white', 'black'], 15);
-    this.x += this.speed;
-    this.x = this.x % this.canvas.element.width;
-
-    setTimeout(() => this.animate(), this.duration);
-  }
-}
-*/  /*
-export function Animation() {
-    let x = -10;
-    let duration = 2000;
-    let speed = 20;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-    Check(x, 11, 15, ['red','white', 'black'], 15);
-    //drawCheck(x - canvas.width, 11, 15, ['green','white', 'black'], 15);
-    x += speed;
-    x = x % canvas.width;
-  
-    setTimeout(Animation, duration / speed );
-}  
-*/  /*
-let x = -10;
-let duration = 2000;
-let speed = 20;
-
-function animate() {
-  
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  drawCheck(x, 11, 15, ['green', 'red', 'yellow', 'white', 'black'], 15);
-  x += speed;
-  
-
-  setTimeout(animate, duration / speed );
-}  
-*/  //----------------------------- add function animation 
- //----------------------------- à mettre ds une class : x = x % canvas.width;
- /*  V1
-
-export class Animation {
-    constructor(start, duration, speed) {
-        this.start = start;
-        this.duration = duration;
-        this.speed = speed;
-    }
-    draw(context) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        Check(start - canvas.width, 11, 15, ['green','white', 'black'], 15);
-        start += speed;
-        start = start % canvas.width;
-        setTimeout(animate, duration / speed);
-    }
-}*/ ;
+parcelHelpers.export(exports, "Animation", ()=>Animation);
 var _position = require("./Position");
 var _check = require("./Check");
 class Animation {
@@ -833,7 +724,7 @@ class Animation {
     }
     animate() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        let check = new (0, _check.Check)(new (0, _position.Position)(this.start, 0), 10, [
+        let check = new (0, _check.Check)(new (0, _position.Position)(this.start, 40), 10, [
             "red",
             "blue",
             "green",
@@ -841,11 +732,10 @@ class Animation {
         ], 20);
         check.draw(this.context);
         this.start += this.speed;
-        if (this.start + check.gridSize * check.size >= this.canvas.width) this.speed = -2;
-        else if (this.start <= 0) this.speed = 2;
+        if (this.start + check.gridSize * check.size >= this.canvas.width) this.start = 20;
         setTimeout(()=>{
             this.animate();
-        }, 16);
+        }, 6);
     }
 }
 
