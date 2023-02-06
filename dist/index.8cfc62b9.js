@@ -557,37 +557,49 @@ function hmrAccept(bundle, id) {
 }
 
 },{}],"6rimH":[function(require,module,exports) {
-var _drawLine = require("./DrawLine");
 var _canvas = require("./Canvas");
+var _line = require("./Line");
 var _square = require("./Square");
 var _position = require("./Position");
+var _check = require("./Check");
+var _animation = require("./Animation");
 let myCanvas = new (0, _canvas.Canvas)("canvas");
-let pos = new (0, _position.Position)(100, 200);
-let square = new (0, _square.Square)(pos, 50, "red");
-square.draw(myCanvas.context);
+let pos = new (0, _position.Position)();
+/*pos.setX(10);
+pos.setY(10);
+//pos.setX(5);
+pos._x = "a";
+pos._y = "b";
 
-},{"./DrawLine":"1iQbz","./Canvas":"fFIka","./Square":"ddTsK","./Position":"7075p"}],"1iQbz":[function(require,module,exports) {
+
+*/ //let square = new Square(pos, 50, 'red');
+//square.draw(myCanvas.context);
+//let line = new Line(pos, 10, ['red', 'blue', 'green'], 20);
+//line.draw(myCanvas.context);
+let check = new (0, _check.Check)(pos, 10, [
+    "red",
+    "blue",
+    "green",
+    "black"
+], 20);
+check.draw(myCanvas.context);
+let canvasId = "canvas";
+let animation = new (0, _animation.Animation)(canvasId);
+animation.animate();
+console.log(canvas.width);
+
+},{"./Canvas":"fFIka","./Line":"cqVHX","./Square":"ddTsK","./Position":"7075p","./Check":"hUeBT","./Animation":"1EkQ1"}],"fFIka":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "DrawLine", ()=>DrawLine);
-var _square = require("./Square");
-class DrawLine {
-    constructor(x, y, length, colors, size){
-        this.x = x;
-        this.y = y;
-        this.length = length;
-        this.colors = colors;
-        this.size = size;
-    }
-    drawLine(context) {
-        for(let i = 0; i < this.length; i++){
-            let square = new (0, _square.Square)(this.x + i * this.size, this.y, this.size, this.colors[i % this.colors.length]);
-            square.draw(context);
-        }
+parcelHelpers.export(exports, "Canvas", ()=>Canvas);
+class Canvas {
+    constructor(id){
+        this.element = document.getElementById(id);
+        this.context = this.element.getContext("2d");
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Square":"ddTsK"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -617,7 +629,29 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"ddTsK":[function(require,module,exports) {
+},{}],"cqVHX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Line", ()=>Line);
+var _square = require("./Square");
+var _position = require("./Position");
+class Line {
+    constructor(pos, length, colors, size){
+        this.pos = pos;
+        this.length = length;
+        this.colors = colors;
+        this.size = size;
+    }
+    draw(context) {
+        for(let i = 0; i < this.length; i++){
+            let squarePos = new (0, _position.Position)(this.pos.x + i * this.size, this.pos.y);
+            let square = new (0, _square.Square)(squarePos, this.size, this.colors[i % this.colors.length]);
+            square.draw(context);
+        }
+    }
+}
+
+},{"./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ddTsK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Square", ()=>Square);
@@ -633,28 +667,270 @@ class Square {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fFIka":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Canvas", ()=>Canvas);
-class Canvas {
-    constructor(id){
-        this.element = document.getElementById(id);
-        this.context = this.element.getContext("2d");
-    }
-}
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7075p":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Position", ()=>Position);
-class Position {
-    constructor(x, y){
-        this.x = x;
-        this.y = y;
+parcelHelpers.export(exports, "Position", ()=>Position) /*export class Position {
+    constructor(x, y) {
+    this._x = x;
+    this._y = y;
+}
+    setX(value) {
+        if (value == "a") value = 10;
+        this._x = value;
+    }
+
+    getX() {
+        return this._x;
+    }
+    //-------
+
+    setY(value) {
+        if (value == "b") value = 0;
+        this._y = value;
+    }
+
+    getY() {
+        return this._y;
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dpgAG","6rimH"], "6rimH", "parcelRequiree364")
+new Position().setX(10)
+new Position().setY(10)
+*/  //--------------------------------------------------
+ /*
+export class Position {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    get positionXY() {
+        return this.x + this.y;
+    }
+    set positions(valeur) {
+        this.x
+    }
+}
+
+*/  /*setX(x) {
+        if (x == "a") // refuse les string "a"
+             return
+        this._x = x;
+    }
+
+    getX() {
+        return this._x;
+    }
+*/  //--------------------------------------------------
+ /*export class Position {
+    constructor(x, y) {
+        this._x = x;
+        this._y = y;
+    }
+    
+    setX(x) {
+        if (x == "a") // refuse les string "a"
+             return
+        this._x = x;
+    }
+
+    getX() {
+        return this._x;
+    }
+}
+
+*/ ;
+class Position {
+    constructor(x, y){
+        this._x = x;
+        this._y = y;
+    }
+    set x(value) {
+        this._x = value;
+    }
+    get x() {
+        return this._x;
+    }
+    set y(value) {
+        this._y = value;
+    }
+    get y() {
+        return this._y;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hUeBT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Check", ()=>Check) /*
+export class Check {
+    constructor(pos, gridSize, colors, size) {
+        this.pos = pos;
+        this.gridSize = gridSize;
+        this.colors = colors;
+        this.size = size;
+    }
+    draw(context) {
+        for (let i = 0; i < this.gridSize; i++) {
+            
+            let currColors = [...colors.slice(i%colors.length, colors.length), ...colors.slice(0, i%colors.length)]; 
+            let squarePos = new Position(this.pos.x, this.pos.y + i * this.size);
+            let line = new Line(squarePos, length, currColors, size);
+            line.draw(context);
+        }
+    }
+}
+*/  /*
+function Check(x, y, gridSize, colors, squareSize) {
+    for (let i = 0; i < gridSize; i++) {
+      let currColors = [...colors.slice(i%colors.length, colors.length), ...colors.slice(0, i%colors.length)]; 
+      Line(x, y + squareSize * i, gridSize, currColors, squareSize);
+    }
+}*/ ;
+var _line = require("./Line");
+var _square = require("./Square");
+var _position = require("./Position");
+class Check {
+    constructor(pos, gridSize, colors, size){
+        this.pos = pos;
+        this.gridSize = gridSize;
+        this.colors = colors;
+        this.size = size;
+    }
+    draw(context) {
+        for(let i = 0; i < this.gridSize; i++){
+            let currColors = [
+                ...this.colors.slice(i % this.colors.length, this.colors.length),
+                ...this.colors.slice(0, i % this.colors.length)
+            ];
+            let squarePos = new (0, _position.Position)(this.pos.x, this.pos.y + this.size * i);
+            let line = new (0, _line.Line)(squarePos, this.gridSize, currColors, this.size);
+            line.draw(context);
+        }
+    }
+}
+
+},{"./Line":"cqVHX","./Square":"ddTsK","./Position":"7075p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1EkQ1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Animation", ()=>Animation) /*export class Animation {
+    constructor(canvasId) {
+      this.canvas = document.getElementById(canvasId);
+      this.context = this.canvas.getContext("2d");
+      this.start = 1;
+      this.speed = 1;
+    }
+    
+    animate() {
+      setInterval(() => {
+        this.clearCanvas();
+        this.start += this.speed;
+        let pos = new Position(this.start, 5);
+        let check = new Check(pos, 10, ['red', 'blue', 'green', 'black'], 20);
+        check.draw(this.context);
+      }, 50);
+    }
+    
+    clearCanvas() {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }
+*/  /*
+class Animation {
+  constructor(canvasId) {
+    this.x = 100;
+    this.duration = 1000;
+    this.speed = 20;
+    this.canvas = new Canvas(canvasId);
+  }
+
+  animate() {
+    let context = this.canvas.context;
+    context.clearRect(0, 0, this.canvas.element.width, this.canvas.element.height);
+
+    let check = new Check(new Position(this.x - this.canvas.element.width, 11), 11, ['green','white', 'black'], 15);
+    this.x += this.speed;
+    this.x = this.x % this.canvas.element.width;
+
+    setTimeout(() => this.animate(), this.duration);
+  }
+}
+*/  /*
+export function Animation() {
+    let x = -10;
+    let duration = 2000;
+    let speed = 20;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    Check(x, 11, 15, ['red','white', 'black'], 15);
+    //drawCheck(x - canvas.width, 11, 15, ['green','white', 'black'], 15);
+    x += speed;
+    x = x % canvas.width;
+  
+    setTimeout(Animation, duration / speed );
+}  
+*/  /*
+let x = -10;
+let duration = 2000;
+let speed = 20;
+
+function animate() {
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawCheck(x, 11, 15, ['green', 'red', 'yellow', 'white', 'black'], 15);
+  x += speed;
+  
+
+  setTimeout(animate, duration / speed );
+}  
+*/  //----------------------------- add function animation 
+ //----------------------------- à mettre ds une class : x = x % canvas.width;
+ /*  V1
+
+export class Animation {
+    constructor(start, duration, speed) {
+        this.start = start;
+        this.duration = duration;
+        this.speed = speed;
+    }
+    draw(context) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        Check(start - canvas.width, 11, 15, ['green','white', 'black'], 15);
+        start += speed;
+        start = start % canvas.width;
+        setTimeout(animate, duration / speed);
+    }
+}*/ ;
+var _position = require("./Position");
+var _check = require("./Check");
+class Animation {
+    constructor(canvasId){
+        this.canvas = document.getElementById(canvasId);
+        this.context = this.canvas.getContext("2d");
+        this.start = 0;
+        this.speed = 2;
+    }
+    animate() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        let check = new (0, _check.Check)(new (0, _position.Position)(this.start, 0), 10, [
+            "red",
+            "blue",
+            "green",
+            "black"
+        ], 20);
+        check.draw(this.context);
+        this.start += this.speed;
+        if (this.start + check.gridSize * check.size >= this.canvas.width) this.speed = -2;
+        else if (this.start <= 0) this.speed = 2;
+        setTimeout(()=>{
+            this.animate();
+        }, 16);
+    }
+}
+
+},{"./Position":"7075p","./Check":"hUeBT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dpgAG","6rimH"], "6rimH", "parcelRequiree364")
 
 //# sourceMappingURL=index.8cfc62b9.js.map
